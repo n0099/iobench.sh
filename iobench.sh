@@ -23,16 +23,16 @@ fileNum=${params[0]}
 totalSize=${params[1]}
 echo blockSize testMode threads rdIOps wrIOps rdMiBps wrMiBps latMsAvg latMs95th >&2
 sysbench fileio --file-total-size="$totalSize" --file-num="$fileNum" prepare
-for block in 4k 1m; do
-    for seqRnd in seq rnd; do
-        for readWrite in rd wr; do
-            for threads in 1 16; do
+for threads in 1 16; do
+    for block in 4k 1m; do
+        for seqRnd in seq rnd; do
+            for readWrite in rd wr; do
                 mode="$seqRnd$readWrite";
                 echo "running $mode with block size $block and $threads threads";
                 bench "$threads" "$block" "$totalSize" "$fileNum" "$mode"
             done
         done
+        bench "$threads" "$block" "$totalSize" "$fileNum" rndrw
     done
-    bench "$threads" "$block" "$totalSize" "$fileNum" rndrw
 done
 sysbench fileio --file-total-size="$totalSize" --file-num="$fileNum" cleanup
