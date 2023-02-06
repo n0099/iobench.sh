@@ -1,7 +1,12 @@
-## [sysbench fileio](https://github.com/akopytov/sysbench) based disk io benchmarking with common metrics
+## [sysbench fileio](https://github.com/akopytov/sysbench) based disk io benchmark with common metrics
 
+## Usage: `iobench.sh <fileNum>/<fileTotalSize>`
+`sysbench fileio` will create some files under the current working directory named starts from `test_file.0` to `test_file.<fileNum>` and have a total sum of sizes equal to `<fileTotalSize>`, so each file will have a size of `<fileNum>/<fileTotalSize>`.
+`iobench.sh` will invoke `sysbench fileio` to do combinations of some common params and convert the human-readable report in its `stdout` to space separated tuples into `stderr` for any further summary analysis about the performance of block device behind testing [`pwd`](https://en.wikipedia.org/wiki/Pwd).
+
+## Example
 ```bash
-[/mnt]$ (./iobench.sh 2x1G 2>&1 >/dev/tty) | column -t
+[/mnt]$ (./iobench.sh 2/1G 2>&1 >/dev/tty) | column -t
 sysbench 1.0.20 (using system LuaJIT 2.1.0-beta3)
 
 2 files, 524288Kb each, 1024Mb total
