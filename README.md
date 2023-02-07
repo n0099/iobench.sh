@@ -8,7 +8,7 @@ Just another simple wrapper over `sysbench fileio` to output a table of common m
 
 ### Example:
 ```bash
-$ ./iobench.sh 2/1G 2> >((sed -u 1q; sort -k2.5,2.6 -k3,3 -k1hr,1) | column -t)
+$ ./iobench.sh 2/1G 2> >((sed -u 1q; sort -k2.5,2.6 -k1h,1 -k3,3) | column -t)
 testing the file system /dev/sdb1 behind /mnt
 prepare 2 files with a total size of 1G
 sysbench 1.0.20 (using system LuaJIT 2.1.0-beta3)
@@ -78,25 +78,25 @@ running rndrw with block size 1m and 16 threads
 sysbench 1.0.20 (using system LuaJIT 2.1.0-beta3)
 
 Removing test files...
-blockSize  testMode  threads  rdIOps     wrIOps    rdMiBps  wrMiBps  latMsAvg  latMs95th
-4k         rndrd     1        534324.08  0.00      2087.20  0.00     0.00      0.00
-4k         seqrd     1        689408.74  0.00      2693.00  0.00     0.00      0.00
-1m         rndrd     1        5525.08    0.00      5525.08  0.00     0.18      0.22
-1m         seqrd     1        5912.00    0.00      5912.00  0.00     0.17      0.20
-4k         rndrd     16       515271.32  0.00      2012.78  0.00     0.03      0.00
-4k         seqrd     16       894866.27  0.00      3495.57  0.00     0.02      0.00
-1m         rndrd     16       6728.51    0.00      6728.51  0.00     2.36      23.95
-1m         seqrd     16       6013.90    0.00      6013.90  0.00     2.65      24.38
-4k         rndrw     1        28345.71   18897.14  110.73   73.82    0.02      0.01
-1m         rndrw     1        179.65     119.76    179.65   119.76   3.27      0.38
-4k         rndrw     16       28891.83   19261.22  112.86   75.24    0.33      0.01
-1m         rndrw     16       186.84     124.56    186.84   124.56   50.31     20.74
-4k         rndwr     1        0.00       19210.84  0.00     75.04    0.05      0.00
-4k         seqwr     1        0.00       28544.05  0.00     111.50   0.03      0.01
-1m         rndwr     1        0.00       122.52    0.00     122.52   7.71      0.44
-1m         seqwr     1        0.00       111.48    0.00     111.48   8.80      0.94
-4k         rndwr     16       0.00       19370.95  0.00     75.67    0.81      0.01
-4k         seqwr     16       0.00       29467.31  0.00     115.11   0.53      0.02
-1m         rndwr     16       0.00       136.90    0.00     136.90   110.97    71.83
-1m         seqwr     16       0.00       117.21    0.00     117.21   113.98    383.33
+blockSize  testMode  threads  rdIOps      wrIOps    rdMiBps   wrMiBps  latMsAvg  latMs95th
+4k         rndrd     1        1008748.32  0.00      3940.42   0.00     0.00      0.00
+4k         seqrd     1        1431434.07  0.00      5591.54   0.00     0.00      0.00
+4k         rndrd     16       1352502.73  0.00      5283.21   0.00     0.01      0.00
+4k         seqrd     16       1704782.16  0.00      6659.31   0.00     0.01      0.00
+64k        rndrd     1        118493.54   0.00      7405.85   0.00     0.01      0.01
+64k        seqrd     1        160453.34   0.00      10028.33  0.00     0.01      0.01
+64k        rndrd     16       248927.40   0.00      15557.96  0.00     0.06      0.01
+64k        seqrd     16       264553.16   0.00      16534.57  0.00     0.06      0.01
+4k         rndrw     1        13615.73    9077.15   53.19     35.46    0.04      0.00
+4k         rndrw     16       13704.99    9136.66   53.54     35.69    0.69      0.00
+64k        rndrw     1        4659.53     3106.35   291.22    194.15   0.13      0.02
+64k        rndrw     16       4668.42     3112.28   291.78    194.52   2.02      0.03
+4k         rndwr     1        0.00        9090.29   0.00      35.51    0.11      0.00
+4k         seqwr     1        0.00        49497.10  0.00      193.35   0.02      0.00
+4k         rndwr     16       0.00        9178.70   0.00      35.85    1.71      0.00
+4k         seqwr     16       0.00        43639.89  0.00      170.47   0.36      0.01
+64k        rndwr     1        0.00        3179.90   0.00      198.74   0.31      0.03
+64k        seqwr     1        0.00        3189.06   0.00      199.32   0.31      0.04
+64k        rndwr     16       0.00        3232.92   0.00      202.06   4.85      0.03
+64k        seqwr     16       0.00        3201.00   0.00      200.06   4.90      0.09
 ```

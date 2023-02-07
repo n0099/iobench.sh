@@ -2,7 +2,7 @@
 
 usage() {
     echo 'Usage: iobench.sh [-v] <fileNum>/<fileTotalSize>
-    e.g. ./iobench.sh 2/1G 2> >((sed -u 1q; sort -k2.5,2.6 -k3,3 -k1hr,1) | column -t)'
+    e.g. ./iobench.sh 2/1G 2> >((sed -u 1q; sort -k2.5,2.6 -k1h,1 -k3,3) | column -t)'
     exit 1
 }
 # https://stackoverflow.com/questions/16483119/an-example-of-how-to-use-getopts-in-bash/16496491#16496491
@@ -48,7 +48,7 @@ echo testing the file system "$device" behind "$(pwd)"
 prepare "$fileNum" "$totalSize"
 echo blockSize testMode threads rdIOps wrIOps rdMiBps wrMiBps latMsAvg latMs95th >&2
 for threads in 1 16; do
-    for block in 4k 1m; do
+    for block in 4k 64k; do
         for seqRnd in rnd seq; do
             for readWrite in rd wr; do
                 mode="$seqRnd$readWrite";
