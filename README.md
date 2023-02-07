@@ -4,12 +4,12 @@ Just another simple wrapper over `sysbench fileio` to output a table of common m
 ### Usage: `iobench.sh [-t] <fileNum>/<fileTotalSize>`
 `sysbench fileio` will create some files under the current working directory named starts from `test_file.0` to `test_file.<fileNum>` and have a total sum of sizes equal to `<fileTotalSize>`, so the size of each `test_file` is `<fileNum>/<fileTotalSize>`.
 
-`iobench.sh` will invoke `sysbench fileio` to do combinations of some common params and convert the human-readable report in its `stdout` to space separated tuples into `stderr` for any further summary analysis about the performance of block device behind testing [`pwd`](https://en.wikipedia.org/wiki/Pwd).
+`iobench.sh` will invoke `sysbench fileio` to do combinations of some common params and convert the human-readable report in its `stdout` to space separated tuples into `stderr` for any further summary analysis about the performance of the file system and its block device behind testing [`pwd`](https://en.wikipedia.org/wiki/Pwd).
 
 ### Example:
 ```bash
-$ (./iobench.sh 2/1G 2>&1 >/dev/tty) | ( sed -u 1q; sort -k2.5,2.6 -k3,3 -k1hr,1 ) | column -t
-
+$ ./iobench.sh 2/1G 2> >((sed -u 1q; sort -k2.5,2.6 -k3,3 -k1hr,1) | column -t)
+testing the file system /dev/sdb1 behind /mnt
 prepare 2 files with a total size of 1G
 sysbench 1.0.20 (using system LuaJIT 2.1.0-beta3)
 
